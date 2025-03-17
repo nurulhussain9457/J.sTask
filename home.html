@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <h1>TODO LIST</h1>
+      <form action="">
+        <input type="text" name="user" value="" placeholder="Enter task" />
+        <button>Add task</button>
+      </form>
+
+      <ul></ul>
+    </div>
+  </body>
+  <script>
+    let userTodo = [];
+    let formElement = document.querySelector("form");
+    formElement.addEventListener("submit", (event) => {
+      event.preventDefault();
+      let userValue = event.target.user.value;
+      userTodo.push(userValue);
+      showAllTodo();
+      event.target.reset();
+      console.log(userTodo);
+    });
+
+    let ulElement = document.querySelector(".main ul");
+    let showAllTodo = () => {
+      let items = "";
+      userTodo.forEach((item, index) => {
+        items += `<li>${item}<span onClick="removeTodoList(${index})">&times;</span></li>`;
+      });
+      ulElement.innerHTML = items;
+    };
+
+    function removeTodoList(currentIndex) {
+      userTodo.splice(currentIndex, 1);
+      showAllTodo();
+    }
+  </script>
+</html>
